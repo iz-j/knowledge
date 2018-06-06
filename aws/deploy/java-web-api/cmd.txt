@@ -1,0 +1,24 @@
+﻿1.環境作成
+eb create --vpc.id vpc-~~~ --vpc.ec2subnets subnet-~~~,subnet-~~~ --vpc.publicip --vpc.elbpublic --elb-type application --profile eval
+
+
+2.Route53
+WEB-API用のドメインのAレコードにELBを紐づける
+こんな感じのやつがAlias Targetにプルダウンで出る
+→awseb-AWSEB-16EK2OHNNQH6O-2084591613.ap-northeast-1.elb.amazonaws.com
+
+3.CloudFrontの設定
+WEB-API用のディストリビューションのOriginにRoute53（さっきELBを紐づけたやつ）を紐づける
+
+
+4.WAFの設定
+CloudFront経由でのみアクセス可能にするために、
+ELBに対して、httpヘッダの"x-pre-shared-key"を検証するルールを付ける
+
+
+5.あとは都度デプロイ
+eb deploy --profile eval
+
+※インスタンスにログイン
+RLoginとか使う
+User Name = ec2-user

@@ -1,0 +1,55 @@
+@keyframes loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loading {
+  z-index: -1;
+  opacity: 0;
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #dadde0;
+}
+
+#loading>img {
+  animation: loading-spin 1.0s cubic-bezier(.20, .30, 0, 1) infinite;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 80px;
+}
+
+app-root:empty+#loading {
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  backface-visibility: hidden;
+}
+
+body.large {
+  zoom: 80%;
+}
+
+body.medium {
+  zoom: 96%;
+}
+
+body.small {
+  zoom: 72%;
+}
+
+body.mini {
+  zoom: 56%;
+}

@@ -1,0 +1,47 @@
+﻿■cloudwatch-logs -> SlackなFunctionをLambdaに作るコマンド
+
+// jsをzipに
+zip cloudwatch-alarms-to-slack.zip ./cloudwatch-alarms-to-slack/app.js
+
+// 関数作成
+aws lambda create-function --region ap-northeast-1 --function-name "admin_cloudwatch-alarms-to-slack" --zip-file fileb://cloudwatch-alarms-to-slack.zip --runtime "nodejs6.10" --handler "cloudwatch-alarms-to-slack/app.handler" --role arn:aws:iam::274527156693:role/aws-lambda-role --timeout 30 --memory-size 128 --profile eval
+
+// CloudwatchLogsが関数を呼べるように権限設定
+aws lambda add-permission --region ap-northeast-1 --function-name "admin_cloudwatch-alarms-to-slack" --statement-id "1" --action "lambda:InvokeFunction" --principal logs.ap-northeast-1.amazonaws.com --profile eval
+
+// 関数更新
+aws lambda update-function-code --region ap-northeast-1 --function-name "admin_cloudwatch-alarms-to-slack" --zip-file fileb://cloudwatch-alarms-to-slack.zip --profile eval
+
+
+■DynamoDBのAlarm -> SlackなFunctionをLambdaに作るコマンド
+
+// jsをzipに
+zip dynamodb-alarms-to-slack.zip ./dynamodb-alarms-to-slack/app.js
+
+// 関数作成
+aws lambda create-function --region ap-northeast-1 --function-name "admin_dynamodb-alarms-to-slack" --zip-file fileb://dynamodb-alarms-to-slack.zip --runtime "nodejs6.10" --handler "dynamodb-alarms-to-slack/app.handler" --role arn:aws:iam::274527156693:role/aws-lambda-role --timeout 30 --memory-size 128 --profile eval
+
+// alarmのSNSを購読
+aws sns --region ap-northeast-1 subscribe --topic-arn arn:aws:sns:ap-northeast-1:274527156693:dynamodb --protocol lambda --notification-endpoint arn:aws:lambda:ap-northeast-1:274527156693:function:admin_dynamodb-alarms-to-slack --profile eval
+
+// SNSが関数を呼べるように権限設定
+aws lambda --region ap-northeast-1 add-permission --function-name "admin_dynamodb-alarms-to-slack" --statement-id "1" --action "lambda:InvokeFunction" --principal sns.amazonaws.com --source-arn arn:aws:sns:ap-northeast-1:274527156693:dynamodb --profile eval
+
+// 関数更新
+aws lambda update-function-code --region ap-northeast-1 --function-name "admin_dynamodb-alarms-to-slack" --zip-file fileb://dynamodb-alarms-to-slack.zip --profile eval
+
+
+■billing -> SlackなFunctionをLambdaに作るコマンド（請求はus-east-1でしか出来ないよ！）
+
+zip billing-to-slack.zip ./billing-to-slack/app.js
+
+aws lambda create-function --region us-east-1 --function-name "admin_billing-to-slack" --zip-file fileb://billing-to-slack.zip --runtime "nodejs6.10" --handler "billing-to-slack/app.handler" --role arn:aws:iam::274527156693:role/aws-lambda-role --timeout 30 --memory-size 128 --profile eval
+
+aws events put-rule --region us-east-1 --name "once-a-day-scheduled-rule" --schedule-expression "cron(0 3 * * ? *)" --profile eval
+
+aws events put-targets --region us-east-1 --rule "once-a-day-scheduled-rule" --targets file://billing-to-slack-target.json --profile eval
+
+aws lambda add-permission --region us-east-1 --function-name "admin_billing-to-slack" --statement-id "once-a-day-scheduled-rule" --action "lambda:InvokeFunction" --principal events.amazonaws.com --source-arn arn:aws:events:us-east-1:274527156693:rule/once-a-day-scheduled-rule --profile eval
+
+aws lambda update-function-code --region us-east-1 --function-name "admin_billing-to-slack" --zip-file fileb://billing-to-slack.zip --profile eval
+

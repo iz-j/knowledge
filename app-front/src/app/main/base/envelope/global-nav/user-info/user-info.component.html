@@ -1,0 +1,38 @@
+<div class="user-avatar" (click)="popoverActive = !popoverActive;">
+  <img [src]="profile.avatar">
+  <span><i class="ico">arrow_drop_down</i></span>
+</div>
+
+<div class="user-popover" [hidden]="!popoverActive">
+  <div class="arrow"></div>
+
+  <div class="profile">
+    <img [src]="profile.avatar">
+    <div>
+      <div class="user-name">{{profile.fullName}}</div>
+      <div class="user-attr">{{profile.companyName}}<br>{{profile.deptName}}</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <ul class="menus">
+    <li>
+      <a routerLink="/main/config/profile"><i class="wap-icon-cog"></i><span>{{text['setting']}}</span></a>
+    </li>
+    <!-- <li (click)="testHtml2Canvas()">
+      <a><i class="wap-icon-feedback"></i><span>{{text['inquiry']}}</span></a>
+    </li>
+    <li>
+      <a><i class="wap-icon-info"></i><span>{{text['about_hoge_connect']}}</span></a>
+    </li> -->
+  </ul>
+
+  <!-- <hr> -->
+
+  <ul class="menus">
+    <li (click)="onLogoutClick()">
+      <a href="javascript:void(0);"><i class="wap-icon-logout"></i><span>{{text['logout']}}</span></a>
+    </li>
+  </ul>
+</div>

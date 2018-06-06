@@ -1,0 +1,34 @@
+<a class="action" (click)="togglePopover()">
+  <i class="wap-icon-bell"></i>
+  <span *ngIf="unreadCount > 0">{{unreadCount}}</span>
+</a>
+
+<div class="popover" [hidden]="!popoverActive">
+  <div class="arrow"></div>
+  <div class="header">
+    <i class="wap-icon-bell">
+      <span>{{text['notification']}}</span>
+    </i>
+    <a href="javascript:void(0)" (click)="onClearAllClick()">{{text['mark_all_as_read']}}</a>
+  </div>
+  <div class="body">
+    <ul class="notifications" *ngIf="notifications.length > 0">
+      <li class="notification" *ngFor="let n of notifications">
+        <a [routerLink]="n.url" (click)="onAnchorClick(n)">
+          <img [src]="n.system ? 'assets/hoge.png' : n.iconPath" [class.system]="n.system" />
+          <div class="content">
+            <p>{{n.message}}</p>
+            <span>{{n.postedAt | fromNow:locale:timezoneOffset}}</span>
+          </div>
+          <i class="wap-icon-cancel" (click)="onClearClick($event, n)"></i>
+        </a>
+      </li>
+    </ul>
+    <div class="no-data" *ngIf="notifications.length === 0 && loaded">
+      <hoge-no-data-message icon="bell" message="{{text['no_unread_notifications']}}"></hoge-no-data-message>
+    </div>
+  </div>
+  <div class="footer">
+    <a routerLink="/main/portal/notification" (click)="popoverActive = false;">{{text['see_all']}}</a>
+  </div>
+</div>

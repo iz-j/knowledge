@@ -1,0 +1,140 @@
+@import "../../../../../index.less";
+.action {
+  cursor: pointer;
+  position: relative;
+  display: block;
+  color: @color-text-light;
+  &:hover {
+    color: @color-text-normal;
+  }
+  i {
+    font-size: 2.0rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+  span {
+    .badge();
+    position: absolute;
+    top: -8px;
+    right: 0;
+  }
+}
+
+.popover {
+  position: absolute;
+  right: 118px;
+  top: 68px;
+  width: 432px;
+  height: 480px;
+  background: @color-background-light;
+  color: @color-text-light;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25), 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 -1px 4px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  .arrow {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-bottom: 10px solid @color-border-light;
+    right: 36px;
+    top: -20px;
+  }
+  .header {
+    height: 56px;
+    border-bottom: solid 1px @color-border-normal;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-sizing: border-box;
+    i {
+      font-size: 2.0rem;
+      display: flex;
+      align-items: center;
+      span {
+        font-size: 1.6rem;
+        padding-left: 4px;
+      }
+    }
+  }
+  .body {
+    height: 424px;
+    overflow-y: auto;
+    .thin-scrollbar();
+    box-sizing: border-box;
+    .notifications {
+      .notification {
+        cursor: pointer;
+        outline: none;
+        position: relative;
+        height: 72px;
+        div {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          padding: 0 16px;
+          border-bottom: solid 1px @color-border-muted;
+          .icon {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          .content {
+            width: 280px;
+            margin: 0 36px 0 12px;
+            box-sizing: border-box;
+            padding: 4px 8px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            p {
+              overflow: hidden;
+              max-height: 100%;
+              line-height: 1.6rem;
+              display: -webkit-box;
+              vertical-align: middle;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 4;
+            }
+          }
+        }
+        &:last-child {
+          border-top: none;
+        }
+        i {
+          position: absolute;
+          right: 12px;
+          bottom: 12px;
+          opacity: 0;
+        }
+        &:hover {
+          background-color: @color-background-hover;
+          i {
+            opacity: 0.65;
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+        .date {
+          font-size: 1.2rem;
+          position: absolute;
+          right: 12px;
+          top: 12px;
+        }
+      }
+    }
+  }
+  div.no-data {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

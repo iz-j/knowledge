@@ -1,0 +1,53 @@
+@import "../index.less";
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+div.page-root {
+  animation: fadeIn 0.2s ease;
+  .container {
+    box-sizing: border-box;
+    position: relative;
+    opacity: 0;
+    &.loaded {
+      animation: fadeIn 0.2s ease forwards;
+    }
+  }
+  &.list {
+    .container {
+      padding: 32px 64px 80px 64px;
+      max-width: 1280px;
+      .screen-small( { padding: 16px 32px 80px 32px; } );
+    }
+  }
+  &.detail {
+    .container {
+      padding: 0 64px 80px 32px;
+      max-width: 1424px;
+      .screen-small( { padding: 0 16px 80px 16px; } );
+    }
+  }
+  &.simple {
+    .container {
+      margin: 0 auto;
+      padding: 16px 32px 80px 32px;
+      max-width: 1600px;
+      .screen-small( { padding: 16px 16px 80px 16px; } );
+    }
+  }
+  div.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+}

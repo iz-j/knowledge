@@ -1,0 +1,89 @@
+<div class="root">
+  <hoge-environment [env]="env"></hoge-environment>
+
+  <div class="logo">
+    <img src="assets/login-logo.png" alt="LOGO">
+  </div>
+
+  <div class="container">
+    <div class="inner-container">
+      <div class="greeting">Nice to see you!</div>
+      <div *ngIf="loginLog" class="account">
+        <img class="avatar" [src]="loginLog?.avatar">
+        <div class="name">
+          <div class="person">{{loginLog?.person}}</div>
+          <div class="company">
+            <img *ngIf="loginLog" [src]="loginLog?.logo">
+            <div>{{loginLog?.company}}</div>
+          </div>
+        </div>
+        <div class="email">
+          <span>{{loginLog?.email}}</span>
+        </div>
+      </div>
+      <div *ngIf="!loginLog" class="empty-history"></div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit($event)">
+        <div *ngIf="!loginLog" class="input-wrapper email">
+          <input #email id="email" type="text" formControlName="email" placeholder="Mail address" autocomplete="off" spellcheck="false" />
+          <label for="email">Mail address</label>
+          <span class="input-color-bar"></span>
+        </div>
+        <div class="input-wrapper">
+          <input #password id="password" type="password" placeholder="Password" formControlName="password" autocomplete="off" (keypress)="onKeyPress($event)" />
+          <label for="password" class="input-label">Password</label>
+          <span class="input-color-bar"></span>
+        </div>
+
+        <button type="submit" [disabled]="authenticating">Login</button>
+      </form>
+
+      <div class="message-area">
+        <p *ngIf="loginForm.touched && !authenticationFailedText && loginForm.get('email').errors">
+          {{text['email_required']}}
+        </p>
+        <p *ngIf="loginForm.touched && !authenticationFailedText && !loginForm.get('email').errors && loginForm.get('password').errors">
+          {{text['password_required']}}
+        </p>
+        <ng-container *ngIf="authenticationFailedText">
+          <p [innerHTML]="authenticationFailedText"></p>
+          <p *ngIf="capslock">{{text['msg_alert_capslock']}}</p>
+        </ng-container>
+      </div>
+
+      <ul class="links">
+        <li>
+          <a routerLink="/password-reset/request">{{text['msg_password_forgot']}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="footer">
+    <ul class="links">
+      <li>
+        <a class="login-with-another" href="javascript:void(0);" (click)="clearLoginLog()">{{text['msg_login_with_another']}}</a>
+      </li>
+      <li>
+        <a class="official" href="javascript:void(0);" tabindex="-1">© Co., Ltd. All rights reserved.</a>
+      </li>
+      <li>
+        <span class="version">Version: {{version}}</span>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="lang-picker">
+  <div class="button" (click)="langPickerActive = !langPickerActive;">Language</div>
+  <div class="popup" *ngIf="langPickerActive">
+    <div class="arrow"></div>
+    <div class="list">
+      <ul>
+        <li *ngFor="let lang of langs" (click)="onLangClick(lang.id)">{{lang.name}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

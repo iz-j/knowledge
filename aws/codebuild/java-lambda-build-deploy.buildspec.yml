@@ -1,0 +1,28 @@
+version: 0.2
+
+# Use Java8 image.
+
+env:
+  variables:
+    APP: hoge
+
+phases:
+  install:
+    commands:
+      - echo Nothing to do in install...
+  pre_build:
+    commands:
+      - echo Nothing to do in pre_build...
+  build:
+    commands:
+      - echo Building jar...
+      - mvn install -DskipTests=true
+      - cd ./$APP
+      - mvn clean package
+  post_build:
+    commands:
+      - echo Uploading to Lambda...
+      - aws s3 rm s3://~~~/$APP.jar
+      - aws s3 cp ./target/$APP.jar s3://~~~/
+      - aws lambda update-function-code --region ap-northeast-1 --function-name $APP --s3-bucket ~~~ --s3-key $APP.jar
+

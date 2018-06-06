@@ -1,0 +1,13 @@
+.metadata
+.project
+.classpath
+.checkstyle
+.factorypath
+.settings/
+target/
+bin/
+.dynamodb-local-libs/
+*.BAK
+build/
+.vscode
+*.jpage

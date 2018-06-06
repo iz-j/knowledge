@@ -1,0 +1,39 @@
+<nav class="nav-root" (mouseenter)="showEnv=false" (mouseleave)="showEnv=true">
+  <hoge-environment [env]="env" [show]="showEnv"></hoge-environment>
+  <div class="brand" [class.portal]="pageType === 'portal'">
+    <h1>
+      <a routerLink="/main/portal/home">
+        <span hidden>hoge CONNECT</span>
+        <img src="assets/nav-logo.png">
+      </a>
+    </h1>
+    <h2 *ngIf="pageType === 'normal'">{{pageTitle}}</h2>
+  </div>
+
+  <div class="global-search">
+    <div class="global-search-input" *ngIf="pageType === 'portal'" (click)="onGlobalSearchClick('portal')">
+      <i class="wap-icon-search"></i>
+      <input placeholder="検索キーワードを入力してください　例）取引先、商品名、見積案件名" tabindex="-1" />
+    </div>
+  </div>
+
+  <div class="right-area">
+    <ul class="menus">
+      <li *ngIf="pageType === 'normal'">
+        <a class="action" (click)="onGlobalSearchClick('feature')">
+          <i class="wap-icon-search"></i>
+        </a>
+      </li>
+      <li>
+        <comment-notification></comment-notification>
+      </li>
+      <li>
+        <notification></notification>
+      </li>
+    </ul>
+    <div class="user-info">
+      <user-info></user-info>
+    </div>
+  </div>
+
+</nav>

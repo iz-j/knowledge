@@ -1,0 +1,23 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Authentication": {
+    "Bucket": "~~~",
+    "Key": "ecr-auth.json"
+  },
+  "Image": {
+    "Name": "0000.dkr.ecr.ap-northeast-1.amazonaws.com/~~~/~~~-web-api:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "8081"
+    }
+  ],
+  "Volumes": [
+    {
+      "HostDirectory": "/tmp",
+      "ContainerDirectory": "/tmp"
+    }
+  ],
+  "Logging": "/var/log/nginx"
+}

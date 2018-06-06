@@ -1,0 +1,365 @@
+@import "../../index.less";
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.root {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: url("/assets/login-background.jpg");
+    background-position: center;
+    background-size: cover;
+    overflow-y: auto;
+    zoom: 1;
+    animation: fadeIn 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    color: #dadde0;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+        color: #ffffff;
+    }
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.logo {
+    margin-bottom: 48px;
+    padding: 0 16px;
+    img {
+        max-width: 496px;
+    }
+}
+
+.container {
+    height: 502px;
+    .inner-container {
+        width: 320px;
+        padding: 24px;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        border-radius: 2px;
+        box-sizing: border-box;
+    }
+    .empty-history {
+        height: 148px;
+    }
+}
+
+.greeting {
+    color: #00bcd4;
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+.account {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    position: relative;
+    i {
+        position: absolute;
+        right: 40px;
+        top: -16px;
+        font-size: 2.0rem;
+        color: #bdbdbd;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+        &:hover {
+            color: #ffffff;
+        }
+    }
+    &:hover {
+        i {
+            opacity: 1;
+        }
+    }
+    .avatar {
+        height: 80px;
+        width: 80px;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+        border-radius: 50%;
+        background-clip: border-box;
+        box-sizing: border-box;
+        border: solid 2px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.15), 0 -1px 2px -1px rgba(0, 0, 0, 0.1);
+    }
+    .name {
+        margin-top: 16px;
+        color: #aaa;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .person {
+            font-size: 2.0rem;
+            width: 100%;
+            text-align: center;
+        }
+        .company {
+            margin-top: 4px;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            img {
+                margin-right: 8px;
+                width: 32px;
+                height: 32px;
+                object-fit: cover;
+                border-radius: 50%;
+                background-clip: border-box;
+                border: solid 1px rgba(255, 255, 255, 0.1);
+            }
+            div {
+                padding-top: 2px;
+            }
+        }
+    }
+    .email {
+        margin-top: 8px;
+        font-size: 1.4rem;
+        color: #aaa;
+        text-align: center;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .input-wrapper {
+        width: 100%;
+        height: 32px;
+        position: relative;
+        background-color: rgba(255, 255, 255, 0.2);
+        background-clip: padding-box;
+        margin-bottom: 16px;
+        margin-top: 16px;
+        border-bottom: 1px solid #cdd0d3;
+        transition: opacity 0.3s ease;
+        &.email {
+            margin-top: 11px;
+        }
+        label {
+            position: absolute;
+            left: 0;
+            top: 32px;
+            width: 100%;
+            color: rgba(0, 0, 0, 0.3);
+            display: block;
+            cursor: text;
+            transform: translate(8px, -24px) scale(1);
+            transition: all 0.3s ease;
+        }
+        input {
+            background: transparent;
+            width: 100%;
+            height: 32px;
+            line-height: 32px;
+            font-size: 1.4rem;
+            padding: 0 8px;
+            outline: none;
+            border: none;
+            &:placeholder-shown {
+                color: #ffffff;
+            }
+            &::-webkit-input-placeholder {
+                color: #ffffff;
+            }
+            &:-moz-placeholder {
+                color: #ffffff;
+            }
+            &::-moz-placeholder {
+                color: #ffffff;
+            }
+            &:-ms-input-placeholder {
+                color: #ffffff;
+            }
+        }
+        .input-color-bar {
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            left: 0;
+            top: 32px;
+            transform: translate(0px, 0px) scale(1);
+            transition: all 0.3s ease;
+        }
+        input:focus~label {
+            transform: translate(-18px, -48px) scale(.8);
+            transition: all 0.3s ease;
+            color: #00bcd4;
+        }
+        input:focus~.input-color-bar {
+            width: 272px;
+            height: 2px;
+            background: #00bcd4;
+            transition: width 0.3s ease;
+        }
+    }
+    .ng-valid~label {
+        color: #00bcd4;
+        transform: translate(-18px, -48px) scale(.8);
+        transition: all 0.3s ease;
+    }
+    .ng-valid~.input-color-bar {
+        width: 272px;
+        height: 2px;
+        background: #00bcd4;
+    }
+    .input-wrapper:hover {
+        border-color: #9299a0;
+    }
+    button {
+        display: block;
+        width: 100%;
+        border-radius: 3px;
+        background-clip: border-box;
+        border: none;
+        text-align: center;
+        padding: 12px 16px;
+        background-color: #42BFC2;
+        transition: all 0.3s ease;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+        outline: none;
+        &:hover {
+            cursor: pointer;
+            background-color: #35a3a6;
+            border-color: #319496;
+            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        &:disabled {
+            cursor: default;
+            opacity: 0.65;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -50%;
+            transform: translateX(-50%);
+            width: 250%;
+            height: 250%;
+            border-radius: 50%;
+            opacity: 0;
+            background-color: rgba(250, 250, 250, 0.7);
+            transition: opacity 0.5s, width 0.5s, height 0.5s;
+        }
+        &:active:after {
+            content: "";
+            width: 0;
+            height: 0;
+            opacity: 1;
+            transition: opacity 0s, width 0s, height 0s;
+        }
+    }
+}
+
+.message-area {
+    margin-top: 16px;
+    min-height: 16px;
+    color: #bf1e56;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    li {
+        margin-top: 12px;
+        font-size: 12px;
+        transition: color 0.3s ease;
+        a {
+            color: #7f7f7f;
+            &:hover {
+                color: #333333;
+            }
+        }
+    }
+}
+
+.footer {
+    font-size: 1.2rem;
+    .links {
+        li {
+            margin-top: 16px;
+            a {
+                color: #fff;
+            }
+            &:nth-child(1) {
+                a {
+                    font-size: 1.6rem;
+                }
+            }
+            span.version {
+                color: #fff;
+                font-size: 1.0rem;
+            }
+        }
+    }
+}
+
+div.lang-picker {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 200px;
+    div.button {
+        background-color: hsla(0, 0%, 100%, 0.5);
+        border-radius: 3px;
+        background-clip: border-box;
+        color: #999;
+        padding: 12px 16px;
+        user-select: none;
+        cursor: pointer;
+    }
+    div.arrow {
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-bottom: 10px solid hsla(0, 0%, 100%, 0.5);
+        margin: -4px 0 0 16px;
+        animation: fadeIn 0.3s ease;
+    }
+    div.list {
+        background-color: hsla(0, 0%, 100%, 0.5);
+        border-radius: 3px;
+        background-clip: border-box;
+        animation: fadeIn 0.3s ease;
+        ul {
+            padding: 8px 0;
+            li {
+                color: #BBB;
+                padding: 8px 16px;
+                cursor: pointer;
+                &:hover {
+                    color: #999;
+                }
+            }
+        }
+    }
+}

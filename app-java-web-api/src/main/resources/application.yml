@@ -1,0 +1,17 @@
+version: {{project.version}}
+
+server:
+  contextPath: /api
+  port: 8081
+
+spring:
+  resources:
+    add-mappings: false
+
+security:
+  basic:
+    enabled: false
+
+app:
+  secret: secret_key_for_dev_only
+  maxFileSize: 2MB

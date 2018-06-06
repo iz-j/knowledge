@@ -1,0 +1,11 @@
+<global-nav *ngIf="pageType !== 'search'" [pageTitle]="pageTitle" [pageType]="pageType"></global-nav>
+
+<menu-list *ngIf="pageType !== 'search'" [modalMode]="menuModal"></menu-list>
+
+<main [class.full]="menuModal">
+  <router-outlet></router-outlet>
+</main>
+
+<div class="scroller" [class.active]="scrollTop > 100" (click)="onScrollerClick()">
+  <i class="wap-icon-arrow-up"></i>
+</div>

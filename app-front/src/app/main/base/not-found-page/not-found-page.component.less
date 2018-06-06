@@ -1,0 +1,46 @@
+@import "../../../index.less";
+
+.center {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: @color-background-light;
+
+  .message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+
+    img {
+      width: 73px;
+      height: 111px;
+    }
+
+    p {
+      font-size: 3.2rem;
+      padding: 16px 32px;
+    }
+  }
+
+  .go-home {
+    a {
+      font-weight: 600;
+    }
+  }
+}
+
+.corner {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+
+  img {
+  }
+}

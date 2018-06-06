@@ -1,0 +1,99 @@
+<div class="backdrop" *ngIf="modal" [class.opened]="opened" (click)="close()"></div>
+
+<div class="toggle" *ngIf="modal && !opened">
+  <i class="wap-icon-menulist" (click)="open()"></i>
+</div>
+
+<div class="menu-root" [class.modal]="modal" [class.opened]="opened">
+
+  <ul class="menu-list">
+    <li class="menu" #homeEl>
+      <a routerLink="/main/portal/home" routerLinkActive="active" (click)="close()">
+        <i class="wap-icon-home"></i>
+        <span>{{text['home']}}</span>
+      </a>
+    </li>
+    <li class="menu" #snoozedEl>
+      <a routerLink="/main/portal/snoozed" routerLinkActive="active" (click)="close()">
+        <i class="wap-icon-clock"></i>
+        <span>{{text['snoozed']}}</span>
+      </a>
+    </li>
+    <li class="menu" #doneEl>
+      <a routerLink="/main/portal/done" routerLinkActive="active" (click)="close()">
+        <i class="wap-icon-checkmark"></i>
+        <span>{{text['done']}}</span>
+      </a>
+    </li>
+    <li class="menu" *ngIf="!host">
+      <a routerLink="/main/portal/announcement" routerLinkActive="active" (click)="close()">
+        <i class="wap-icon-info"></i>
+        <span>{{text['announcement']}}</span>
+        <span class="counter hasBadge" *ngIf="announcementCounter > 0">{{announcementCounter}}</span>
+      </a>
+    </li>
+
+    <li class="divider"></li>
+    <li>
+      <ul class="feature-menu" *ngIf="menuList">
+        <ng-container *ngFor="let menu of menuList;">
+          <!-- Menu without sub -->
+          <li *ngIf="menu.subMenus.length === 0" class="menu {{menu.id}}" #menuEl>
+            <a [routerLink]="[menu.url]" routerLinkActive="active" (click)="close()">
+              <span>{{menu.name}}</span>
+            </a>
+          </li>
+          <!-- Menu with sub -->
+          <li *ngIf="menu.subMenus.length > 0" class="menu {{menu.id}}" (click)="onExpandableMenuClick(menu)" #menuEl>
+            <a>
+              <span>{{menu.name}}</span>
+              <i *ngIf="!menu.fold" class="wap-icon-angle-up angle"></i>
+              <i *ngIf="menu.fold" class="wap-icon-angle-down angle"></i>
+            </a>
+          </li>
+          <li class="submenus" [ngClass]="{fold: menu.fold}">
+            <ul>
+              <li *ngFor="let subMenu of menu.subMenus;" class="menu {{subMenu.id}}" #subMenuEl>
+                <a class="submenu" [routerLink]="[menu.url, subMenu.url]" routerLinkActive="active" (click)="close()">
+                  <span>{{subMenu.name}}</span>
+                  <span *ngIf="menu.hasCounter" class="counter" [class.empty]="subMenu.counter == 0">{{subMenu.counter}}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+    </li>
+
+    <li class="divider"></li>
+    <li class="menu document_search">
+      <a routerLink="/main/search/documents" routerLinkActive="active" (click)="close()">
+        <i class="wap-icon-search"></i>
+        <span>{{text['document_search']}}</span>
+      </a>
+    </li>
+    <li class="menu activity" #activityEl>
+      <a routerLink="/main/portal/activity" routerLinkActive="active" (click)="close()">
+        <i class="wap-icon-list"></i>
+        <span>{{text['activity']}}</span>
+      </a>
+    </li>
+
+    <!-- <li class="menu">
+          <a>
+            <i class="wap-icon-cog "></i>
+            <span>{{text['company_setting']}}</span>
+          </a>
+        </li>
+        <li class="help ">
+          <a>
+            <i class="wap-icon-question "></i>
+            <span>{{text['help']}}</span>
+          </a>
+        </li> -->
+  </ul>
+
+  <div class="powered-by">
+    <span>powered-by</span>
+    <img src="assets/logo-black.png" title="Version: {{version}}">
+  </div>

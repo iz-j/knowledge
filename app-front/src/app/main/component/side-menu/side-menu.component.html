@@ -1,0 +1,22 @@
+<div class="side-menu">
+  <div class="user-info">
+    <img class="avatar" [src]="user?.avatar">
+    <div>
+      <div class="user-name">{{user?.fullName}}</div>
+      <div class="user-attr">{{user?.companyName}}</div>
+      <div class="user-attr">{{user?.deptName}}</div>
+    </div>
+  </div>
+  <ul class="menus">
+    <li *ngFor="let menu of menus;" [ngClass]="{'divider': menu.divider, 'menu': !menu.divider, 'active': menu.active}" (click)="onClick(menu)">
+      <span><i class="wap-icon-search" *ngIf="menu.search"></i>{{menu.label}}</span>
+      <span *ngIf="menu.count !== undefined">{{menu.count}}</span>
+    </li>
+    <li class="divider"></li>
+    <li class="menu" (click)="onHelpClick()">
+      <div><i class="help wap-icon-question"></i>ヘルプ</div>
+    </li>
+  </ul>
+</div>
+
+<tutorial #tutorial></tutorial>

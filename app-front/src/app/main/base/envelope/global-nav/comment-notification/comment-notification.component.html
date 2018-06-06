@@ -1,0 +1,30 @@
+<a class="action" (click)="togglePopover()">
+  <i class="wap-icon-comment"></i>
+  <span *ngIf="notificationsCount > 0">{{notificationsCount}}</span>
+</a>
+
+<div class="popover" [hidden]="!popoverActive">
+  <div class="arrow"></div>
+  <div class="header">
+    <i class="wap-icon-comment">
+      <span>{{text['comments']}}</span>
+    </i>
+  </div>
+  <div class="body">
+    <ul class="notifications" *ngIf="notifications.length > 0 && loaded">
+      <li class="notification" *ngFor="let n of notifications">
+        <div (click)="onNotificationClick(n)">
+          <img class="icon" [src]="n.speakerIcon" />
+          <span class="date">{{n.notifiedAt | fromNow:locale:timezoneOffset}}</span>
+          <div class="content">
+            <p [innerHtml]="n.message"></p>
+          </div>
+        </div>
+        <i class="wap-icon-cancel clear-comment" (click)="onClearClick($event, n)"></i>
+      </li>
+    </ul>
+    <div class="no-data" *ngIf="notifications.length === 0 && loaded">
+      <hoge-no-data-message icon="comment" [message]="text['no_comment_notifications']"></hoge-no-data-message>
+    </div>
+  </div>
+</div>

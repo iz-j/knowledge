@@ -1,0 +1,3 @@
+app:
+  secret: secret_key_for_eval_only
+  maxFileSize: 2MB

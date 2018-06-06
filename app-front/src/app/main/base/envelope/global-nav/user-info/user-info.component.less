@@ -1,0 +1,112 @@
+@import "../index.less";
+
+div.user-avatar {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+
+  img {
+    width: 40px;
+    height: 40px;
+    margin: 0 8px;
+    border: 4px solid @color-border-muted;
+    border-radius: 50%;
+    background-clip: border-box;
+    box-sizing: border-box;
+  }
+
+  span {
+    display: none;
+    color: @color-text-inverse;
+
+    .screen-sm({
+      display: block;
+    });
+
+    .ico {
+      font-size: 2.0rem;
+      vertical-align: bottom;
+    }
+  }
+}
+
+div.user-popover {
+  position: absolute;
+  right: 36px;
+  top: 68px;
+  width: 300px;
+  background: @color-background-light;
+  color: @color-text-normal;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25), 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 -1px 4px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+
+  div.arrow {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-bottom: 10px solid @color-background-light;
+    right: 14px;
+    top: -20px;
+  }
+
+  hr {
+    margin: 0;
+    border: 0;
+    border-top: 1px solid @color-border-normal;
+  }
+
+  div.profile {
+    display: flex;
+    align-items: center;
+    padding: 1.6rem;
+    overflow: hidden;
+
+    img {
+      flex: 0 0 auto;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-clip: border-box;
+    }
+
+    div {
+      flex: 1 1 auto;
+
+      div.user-name {
+        padding: 16px 0 16px 16px;
+        word-break: break-all;
+      }
+  
+      div.user-attr {
+        padding: 0 0 16px 16px;
+        color: @color-text-light;
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  ul.menus {
+    li {
+      &:hover {
+        background-color: @color-background-active;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        color: @color-text-light;
+        padding: 12px 0 12px 16px;
+        cursor: pointer;
+
+        i {
+          padding-right: 8px;
+        }
+      }
+    }
+  }
+}
